@@ -1,6 +1,7 @@
 from fastapi import FastAPI, Request, Header
 from dotenv import load_dotenv
 import re, requests, os, logging, random
+from typing import Optional
 
 load_dotenv()
 app = FastAPI()
@@ -21,13 +22,19 @@ def root():
 
 # Honeypot endpoint
 @app.post("/honeypot")
-async def honeypot(request: Request, x_api_key: str = Header(...)):
+async def honeypot(
+    request: Request,
+    x_api_key: Optional[str] = Header(None)
+):
     if x_api_key != API_KEY:
         return {"status": "error", "message": "Unauthorized"}
 
     data = await request.json()
-    text = data["message"]["text"]
-    session_id = data["sessionId"]
+
+    message = data.get("message", {})
+    text = message.get("text", "")
+    session_id = data.get("sessionId", "unknown-session")
+
 
     # Store conversation history
     if session_id not in conversations:
