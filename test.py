@@ -1,7 +1,7 @@
 import os, requests
 
 # Local API URL
-url = "http://127.0.0.1:8000/honeypot"
+url = "https://honeypot-api-721b.onrender.com/honeypot"
 
 # Replace with your actual API key
 headers = {
