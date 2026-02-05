@@ -1,4 +1,4 @@
-import requests
+import os, requests
 
 # Local API URL
 url = "http://127.0.0.1:8000/honeypot"
@@ -6,7 +6,7 @@ url = "http://127.0.0.1:8000/honeypot"
 # Replace with your actual API key
 headers = {
     "Content-Type": "application/json",
-    "x-api-key": "efe714b0392dfd591802a0668aee3e5b"
+    "x-api-key": os.getenv("API_KEY", "")
 }
 
 # Diverse test cases

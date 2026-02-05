@@ -1,6 +1,8 @@
 from fastapi import FastAPI, Request, Header
+from dotenv import load_dotenv
 import re, requests, os, logging, random
 
+load_dotenv()
 app = FastAPI()
 
 # Load API key from environment variable
